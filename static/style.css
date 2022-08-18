@@ -35,6 +35,13 @@ html {
     align-items: center;
 }
 
+@media (max-width: 768px) {
+    .boton_3 {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
 /* Title */
 .title {
     font-size: 30px;
