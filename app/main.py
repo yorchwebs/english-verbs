@@ -8,9 +8,9 @@ app = Flask(__name__)
 # :return: A connection to the database.
 def connection():
     s = 'us-cdbr-east-06.cleardb.net'
-    d = 'heroku_35d14f7567de1a2' 
-    u = 'bac9918e84bde5'
-    p = '4ea4a07a'
+    d = 'heroku_c3c0c42499357eb' 
+    u = 'bcd60126f7afb5'
+    p = 'b4037184'
     conn = pymysql.connect(host=s, user=u, password=p, database=d)
     return conn
 
