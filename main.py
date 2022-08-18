@@ -3,6 +3,12 @@ import pymysql
 
 # Creating a Flask object called `app`
 app = Flask(__name__)
+PORT = 5000
+DEBUG = False
+
+@app.errorhandler(404)
+def not_found(error):
+    return "Not Found."
 
 # This function connects to the database and returns the connection object
 # :return: A connection to the database.
@@ -32,4 +38,4 @@ def main():
 # Checking if the file is being run directly or if it is being imported.
 if(__name__ == "__main__"):
     # Running the app.
-    app.run()
+    app.run(port = PORT, debug = True)
