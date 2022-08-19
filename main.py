@@ -13,10 +13,10 @@ def not_found(error):
 # This function connects to the database and returns the connection object
 # :return: A connection to the database.
 def connection():
-    s = 'us-cdbr-east-06.cleardb.net'
-    d = 'heroku_c3c0c42499357eb' 
-    u = 'bcd60126f7afb5'
-    p = 'b4037184'
+    s = 'localhost'
+    d = 'english_verb_list' 
+    u = 'root'
+    p = 'XXXXXXXX'
     conn = pymysql.connect(host=s, user=u, password=p, database=d)
     return conn
 
