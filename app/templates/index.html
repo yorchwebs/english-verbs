@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>English Verb List</title>
+</head>
+<body>
+    <!-- Tittle -->
+    {% block header %}
+    <header>
+        <h1 class="title">LIST OF MOST COMMON REGULAR AND IRREGULAR VERBS IN ENGLISH</h1>
+    </header>
+    {% endblock %}
+    {% block content %}
+
+    <!-- Section: Table -->
+    <section class="table">
+
+        <div>
+            <!-- Search Modul -->
+            <form method="post" class="boton_3">
+                {{ form.csrf_token }}
+                {{ form.verb.label }} {{ form.verb(size=20) }}
+                {{ form.submit() }}
+            </form>
+        </div>
+
+        <div class="cuadro">
+            
+            <!-- Table -->
+            <table>
+
+                <div class="boton_3">
+                </div>
+
+                <!-- Table Column Names -->
+                <thead class="thead">
+                    <tr>
+                        <th>NUM</th>
+                        <th>TYPE</th>
+                        <th>SIMPLE FORM</th>
+                        <th>THIRD PERSON</th>
+                        <th>SIMPLE PAST</th>
+                        <th>PAST PARTICIPLE</th>
+                        <th>GERUND</th>
+                        <th>MEANING</th>
+                    </tr>
+                </thead>
+
+                <!-- Table Column & Row Dates -->
+                {% if verbs %}
+                <tbody class="tbody">
+
+                    <!-- For Loop -->
+                    {% for verb in verbs %}
+                    <tr>
+                        <td>{{verb.num_id}}</td>
+                        <td>{{verb.verb_type}}</td>
+                        <td>{{verb.simple_form}}</td>
+                        <td>{{verb.third_person}}</td>
+                        <td>{{verb.simple_past}}</td>
+                        <td>{{verb.past_participle}}</td>
+                        <td>{{verb.gerund}}</td>
+                        <td>{{verb.meaning}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+                {% else %}
+
+                    <!-- For Loop -->
+                    {% for verb in all_verbs %}
+                    <tr>
+                        <td>{{verb.num_id}}</td>
+                        <td>{{verb.verb_type}}</td>
+                        <td>{{verb.simple_form}}</td>
+                        <td>{{verb.third_person}}</td>
+                        <td>{{verb.simple_past}}</td>
+                        <td>{{verb.past_participle}}</td>
+                        <td>{{verb.gerund}}</td>
+                        <td>{{verb.meaning}}</td>
+                    </tr>
+
+                    {% endfor %}
+
+                {% endif %}
+            </table>
+            <div class="boton_3"></div>
+        </div>
+    </section>
+    {% endblock %}
+
+    <!-- Section: Footer -->
+    {% block footer %}
+    <div class="footer">
+        <div>
+            <div class="title_footer">
+                <p>Development By_ <strong>Jorge Garcia Dev</strong></p>
+            </div>
+        </div>
+        <div>
+            <div>
+                <p>Follow Me In My Social Networks</p>
+            </div>
+        </div>
+        <div class="img_container">
+            <div>
+                <a target="_blank" href="https://www.facebook.com/Jorge-Garcia-Dev-105078822218513">
+                    <img class="img" src="{{ url_for('static', filename='img/facebook.png') }}" alt="Logo Facebook">
+                </a>
+            </div>
+            <div>
+                <a target="_blank" href="https://twitter.com/JorgeGarcia_Dev">
+                    <img class="img" src="{{ url_for('static', filename='img/twitter.png') }}" alt="Logo Twitter">
+                </a>
+            </div>
+            <div>
+                <a target="_blank" href="https://www.linkedin.com/in/jorgegarcia-dev">
+                    <img class="img" src="{{ url_for('static', filename='img/linkedin.png') }}" alt="Logo Linkedin">
+                </a>
+            </div>
+            <div>
+                <a target="_blank" href="https://github.com/JorgeGarcia-Dev">
+                    <img class="img" src="{{ url_for('static', filename='img/github.png') }}" alt="Logo GitHub">
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>
