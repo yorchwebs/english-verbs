@@ -1,7 +1,15 @@
 venv/
+env/
+
 .env
+
+csv/
 
 *.pyc
 __pycache__/
 
 instance/
+
+.DS_Store
+
+read_data.py

@@ -20,25 +20,20 @@
     {% endblock %}
     {% block content %}
 
+    <div>
+        <!-- Search Modul -->
+        <form method="post" class="boton_3">
+            {{ form.csrf_token }}
+            {{ form.verb.label }} {{ form.verb(size=20) }}
+                {{ form.submit(class="send_button") }}
+        </form>
+    </div>
+
     <!-- Section: Table -->
     <section class="table">
-
-        <div>
-            <!-- Search Modul -->
-            <form method="post" class="boton_3">
-                {{ form.csrf_token }}
-                {{ form.verb.label }} {{ form.verb(size=20) }}
-                {{ form.submit() }}
-            </form>
-        </div>
-
-        <div class="cuadro">
             
             <!-- Table -->
             <table>
-
-                <div class="boton_3">
-                </div>
 
                 <!-- Table Column Names -->
                 <thead class="thead">
@@ -92,8 +87,6 @@
 
                 {% endif %}
             </table>
-            <div class="boton_3"></div>
-        </div>
     </section>
     {% endblock %}
 
