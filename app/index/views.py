@@ -1,4 +1,9 @@
-from flask import Blueprint, render_template, request
+from flask import request
+from flask import Response
+from flask import Blueprint
+from flask import render_template
+
+from typing import List
 
 from app.index.models import Verb
 
@@ -12,13 +17,13 @@ index_bp = Blueprint(
 
 
 @index_bp.route("/", methods=["GET", "POST"])
-def index():
+def index() -> Response:
     form: VerbForm = VerbForm()
 
     if request.method == "POST" and form.validate_on_submit():
-        insert_verb = VerbFormModel(verb=form.verb.data)
+        insert_verb: VerbFormModel = VerbFormModel(verb=form.verb.data)
         if insert_verb.verb:
-            verbs = Verb.select().where(
+            verbs: List[str] = Verb.select().where(
                 (Verb.simple_form.contains(insert_verb.verb))
                 | (Verb.third_person.contains(insert_verb.verb))
                 | (Verb.simple_past.contains(insert_verb.verb))
@@ -27,7 +32,7 @@ def index():
                 | (Verb.meaning.contains(insert_verb.verb))
             )
         else:
-            verbs = Verb.select(
+            verbs: List[str] = Verb.select(
                 Verb.num_id,
                 Verb.verb_type,
                 Verb.simple_form,
@@ -40,7 +45,7 @@ def index():
 
         return render_template("index.html", form=form, verbs=verbs)
 
-    all_verbs = Verb.select(
+    all_verbs: List[str] = Verb.select(
         Verb.num_id,
         Verb.verb_type,
         Verb.simple_form,
