@@ -7,6 +7,10 @@ from decouple import config
 
 
 class MySQLDatabaseSingleton:
+    """Singleton class to connect MySQL and Flask with peewee,
+    pymysql and python-decouple.
+    """
+
     _instance = None
 
     def __new__(cls):
@@ -16,6 +20,7 @@ class MySQLDatabaseSingleton:
         return cls._instance
 
     def init_db(self):
+        """Initialize the database."""
         self.database = peewee.MySQLDatabase(
             database=config("DB_MYSQL"),
             host="localhost",

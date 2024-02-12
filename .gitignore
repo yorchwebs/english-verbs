@@ -13,3 +13,5 @@ instance/
 .DS_Store
 
 read_data.py
+
+.coverage
