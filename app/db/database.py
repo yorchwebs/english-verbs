@@ -1,5 +1,6 @@
-# This is my Singleton Class to connect MySQL and Flask with:
-# peewee, pymysql and python-decouple.
+"""This is my Singleton Class to connect MySQL and Flask with:
+peewee, pymysql and python-decouple.
+"""
 
 import peewee
 
