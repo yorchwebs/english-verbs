@@ -1,5 +1,4 @@
-venv/
-env/
+.venv/
 
 .env
 
@@ -15,3 +14,11 @@ instance/
 read_data.py
 
 .coverage
+
+csvs/
+
+python_csv.py
+
+app.db
+
+.flake8

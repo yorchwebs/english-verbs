@@ -3,7 +3,7 @@ from flask import Flask
 # from flask_wtf.csrf import CSRFProtect
 
 from app.index.views import index_bp
-from app.db.database import MySQLDatabaseSingleton
+from app.db.database import DatabaseSingleton
 
 from app.index.models import Verb
 
@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 # csrf = CSRFProtect()
 
-database = MySQLDatabaseSingleton().database
+database = DatabaseSingleton().database
 
 
 def create_app(config):

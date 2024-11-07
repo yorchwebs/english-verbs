@@ -1,10 +1,10 @@
 """This module contains the models for the index page."""
 import peewee
 
-from app.db.database import MySQLDatabaseSingleton
+from app.db.database import DatabaseSingleton
 
 
-database = MySQLDatabaseSingleton().database
+database = DatabaseSingleton().database
 
 
 class BaseModel(peewee.Model):
@@ -32,15 +32,15 @@ class Verb(BaseModel):
         meaning (str): The meaning of the verb.
     """
 
-    num_id = peewee.PrimaryKeyField()
-    verb_type = peewee.CharField()
-    simple_form = peewee.CharField()
-    third_person = peewee.CharField()
-    simple_past = peewee.CharField()
-    past_participle = peewee.CharField()
-    gerund = peewee.CharField()
-    meaning = peewee.CharField()
+    NUM = peewee.PrimaryKeyField()
+    TYPE = peewee.CharField()
+    SIMPLE_FORM= peewee.CharField()
+    THIRD_PERSON = peewee.CharField()
+    SIMPLE_PAST = peewee.CharField()
+    PAST_PARTICIPLE = peewee.CharField()
+    GERUND = peewee.CharField()
+    MEANING = peewee.CharField()
 
     class Meta:
 
-        table_name = 'verbs'
+        table_name = 'english_verbs'

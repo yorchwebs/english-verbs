@@ -7,10 +7,8 @@ import peewee
 from decouple import config
 
 
-class MySQLDatabaseSingleton:
-    """Singleton class to connect MySQL and Flask with peewee,
-    pymysql and python-decouple.
-    """
+class DatabaseSingleton:
+    """Singleton class to connect SQLite and Flask with peewee."""
 
     _instance = None
 
@@ -22,9 +20,9 @@ class MySQLDatabaseSingleton:
 
     def init_db(self):
         """Initialize the database."""
-        self.database = peewee.MySQLDatabase(
-            database=config("DB_MYSQL"),
-            host="localhost",
-            user=config("USER_MYSQL"),
-            password=config("PASSWORD_MYSQL"),
-        )
+        db_path = config("DB_SQLITE", default="app.db")  # Ruta por defecto
+        self.database = peewee.SqliteDatabase(db_path)
+
+    def get_database(self):
+        """Return the database instance."""
+        return self.database

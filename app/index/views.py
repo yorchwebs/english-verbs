@@ -1,15 +1,9 @@
-"""This module contains the views for the index page."""
-from flask import Response
-from flask import Blueprint
-from flask import render_template
-
-from typing import List
-
+from flask import Response, Blueprint, render_template, request
 from app.index.models import Verb
-
 from app.index.form import VerbForm
-
 from app.index.utils.pydantic_validator import VerbFormModel
+from typing import List
+from math import ceil
 
 index_bp = Blueprint(
     "index_bp", __name__, template_folder="templates", static_folder="static"
@@ -19,24 +13,38 @@ index_bp = Blueprint(
 @index_bp.route("/", methods=["GET", "POST"])
 def index() -> Response:
     """Handle index page and form submission."""
-    form: VerbForm = VerbForm()
-    if form.validate_on_submit():
-        # Insert verb and retrieve matching verbs
-        verb: VerbFormModel = form.verb.data
-        if verb:
-            matching_verbs: List[Verb] = Verb.select().where(
-                (Verb.simple_form.contains(verb))
-                | (Verb.third_person.contains(verb))
-                | (Verb.simple_past.contains(verb))
-                | (Verb.past_participle.contains(verb))
-                | (Verb.gerund.contains(verb))
-                | (Verb.meaning.contains(verb))
-            )
-        else:
-            # Retrieve all verbs if form is submitted but verb field is empty
-            matching_verbs = Verb.select()
-        return render_template("index.html", form=form, verbs=matching_verbs)
-    # Retrieve all verbs if request method is GET
-    verbs = Verb.select()
-    return render_template("index.html", form=form, verbs=verbs)
+    form = VerbForm()
+    per_page = 20  # Número de elementos por página
+    page = request.args.get("page", 1, type=int)
 
+    if form.validate_on_submit():
+        page = 1
+        # Insertar verbo y obtener verbos coincidentes
+        verb: VerbFormModel = form.verb.data
+        query = Verb.select()
+        if verb:
+            query: List[Verb] = query.select().where(
+                (Verb.SIMPLE_FORM.contains(verb))
+                | (Verb.THIRD_PERSON.contains(verb))
+                | (Verb.SIMPLE_PAST.contains(verb))
+                | (Verb.PAST_PARTICIPLE.contains(verb))
+                | (Verb.GERUND.contains(verb))
+                | (Verb.MEANING.contains(verb))
+            )
+    else:
+        # Obtener todos los verbos si se envía el formulario sin un verbo específico
+        query = Verb.select()
+
+    # Obtener total de resultados y configurar la paginación
+    total_verbs = query.count()
+    total_pages = ceil(total_verbs / per_page)
+    verbs = query.paginate(page, per_page)
+
+    return render_template(
+        "index.html",
+        form=form,
+        verbs=verbs,
+        page=page,
+        total_pages=total_pages,
+        per_page=per_page,
+    )

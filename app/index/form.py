@@ -5,5 +5,5 @@ from wtforms import StringField, SubmitField
 
 class VerbForm(FlaskForm):
     """Form for searching and filtering verbs."""
-    verb = StringField("Search and Filter By:")
-    submit = SubmitField("Search")
+    verb = StringField("Buscar y/o filtrar por:")
+    submit = SubmitField("Buscar")
