@@ -43,4 +43,4 @@ class Verb(BaseModel):
 
     class Meta:
 
-        table_name = 'english_verbs'
+        table_name = 'Verbs'

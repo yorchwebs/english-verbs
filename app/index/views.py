@@ -1,7 +1,7 @@
 from flask import Response, Blueprint, render_template, request
-from app.index.models import Verb
+from utils.pydantic_validator import VerbFormModel
 from app.index.form import VerbForm
-from app.index.utils.pydantic_validator import VerbFormModel
+from app.index.models import Verb
 from typing import List
 from math import ceil
 

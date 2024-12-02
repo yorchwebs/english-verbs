@@ -1,9 +1,5 @@
 .venv/
 
-.env
-
-csv/
-
 *.pyc
 __pycache__/
 
@@ -11,14 +7,12 @@ instance/
 
 .DS_Store
 
-read_data.py
-
 .coverage
 
-csvs/
-
-python_csv.py
+Verbs.json
 
 app.db
 
 .flake8
+
+.env
