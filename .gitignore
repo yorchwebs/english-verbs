@@ -16,3 +16,8 @@ app.db
 .flake8
 
 .env
+
+utils/audioverbs_poblation.py
+utils/database_poblation.py
+
+jsons/

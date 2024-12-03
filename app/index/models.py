@@ -47,26 +47,23 @@ class Verb(BaseModel):
         table_name = "verbs"
 
 
-class AudioVerb(BaseModel):
-    """A model representing an audio verb.
+# class AudioVerb(BaseModel):
+#     """A model representing an audio verb.
 
-    Attributes:
-        simple_form (str): The simple form of the verb.
-        third_person (str): The third person form of the verb.
-        simple_past (str): The simple past form of the verb.
-        past_participle (str): The past participle form of the verb.
-        gerund (str): The gerund form of the verb.
-    """
+#     Attributes:
+#         simple_form (str): The simple form of the verb.
+#         third_person (str): The third person form of the verb.
+#         simple_past (str): The simple past form of the verb.
+#         past_participle (str): The past participle form of the verb.
+#         gerund (str): The gerund form of the verb.
+#     """
 
-    NUM = peewee.PrimaryKeyField()
-    SIMPLE_FORM = peewee.CharField()
-    THIRD_PERSON = peewee.CharField()
-    SIMPLE_PAST = peewee.CharField()
-    PAST_PARTICIPLE = peewee.CharField()
-    GERUND = peewee.CharField()
+#     SIMPLE_FORM = peewee.CharField()
+#     THIRD_PERSON = peewee.CharField()
+#     SIMPLE_PAST = peewee.CharField()
+#     PAST_PARTICIPLE = peewee.CharField()
+#     GERUND = peewee.CharField()
+#     VERBS = peewee.ForeignKeyField('Verb', backref='audio_verbs', on_delete='CASCADE', unique=True)
 
-    VERB = peewee.ForeignKeyField(Verb, unique=True)
-
-    class Meta:
-
-        table_name = "audio_verbs"
+#     class Meta:
+#         table_name = "audio_verbs"

@@ -5,7 +5,7 @@ from flask import Flask
 from app.index.views import index_bp
 from app.db.database import DatabaseSingleton
 
-from app.index.models import Verb, AudioVerb
+from app.index.models import Verb
 
 app = Flask(__name__)
 
@@ -33,6 +33,6 @@ def create_app(config):
     app.register_blueprint(index_bp)
     
     with app.app_context():
-        database.create_tables([Verb, AudioVerb], safe=True)
+        database.create_tables([Verb], safe=True)
 
     return app
