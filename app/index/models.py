@@ -1,4 +1,5 @@
 """This module contains the models for the index page."""
+
 import peewee
 
 from app.db.database import DatabaseSingleton
@@ -34,7 +35,7 @@ class Verb(BaseModel):
 
     NUM = peewee.PrimaryKeyField()
     TYPE = peewee.CharField()
-    SIMPLE_FORM= peewee.CharField()
+    SIMPLE_FORM = peewee.CharField()
     THIRD_PERSON = peewee.CharField()
     SIMPLE_PAST = peewee.CharField()
     PAST_PARTICIPLE = peewee.CharField()
@@ -43,4 +44,29 @@ class Verb(BaseModel):
 
     class Meta:
 
-        table_name = 'Verbs'
+        table_name = "verbs"
+
+
+class AudioVerb(BaseModel):
+    """A model representing an audio verb.
+
+    Attributes:
+        simple_form (str): The simple form of the verb.
+        third_person (str): The third person form of the verb.
+        simple_past (str): The simple past form of the verb.
+        past_participle (str): The past participle form of the verb.
+        gerund (str): The gerund form of the verb.
+    """
+
+    NUM = peewee.PrimaryKeyField()
+    SIMPLE_FORM = peewee.CharField()
+    THIRD_PERSON = peewee.CharField()
+    SIMPLE_PAST = peewee.CharField()
+    PAST_PARTICIPLE = peewee.CharField()
+    GERUND = peewee.CharField()
+
+    VERB = peewee.ForeignKeyField(Verb, unique=True)
+
+    class Meta:
+
+        table_name = "audio_verbs"
