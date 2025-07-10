@@ -1,11 +1,10 @@
 from flask import Flask
 
-# from flask_wtf.csrf import CSRFProtect
-
-from app.index.views import index_bp
 from app.db.database import DatabaseSingleton
-
 from app.index.models import Verb
+
+# from flask_wtf.csrf import CSRFProtect
+from app.index.views import index_bp
 
 app = Flask(__name__)
 
@@ -31,7 +30,7 @@ def create_app(config):
     # csrf.init_app(app)
 
     app.register_blueprint(index_bp)
-    
+
     with app.app_context():
         database.create_tables([Verb], safe=True)
 

@@ -1,8 +1,8 @@
-"""This is my Singleton Class to connect MySQL and Flask with:
+"""This is my Singleton Class to connect PostgreSQL and Flask with:
 peewee, pymysql and python-decouple.
 """
-import peewee
 
+import peewee
 from decouple import config
 
 
@@ -12,6 +12,7 @@ class DatabaseSingleton:
     _instance = None
 
     def __new__(cls):
+        """Database instance."""
         if cls._instance is None:
             cls._instance = super().__new__(cls)
             cls._instance.init_db()

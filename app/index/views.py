@@ -1,9 +1,11 @@
-from flask import Response, Blueprint, render_template, request
-from utils.pydantic_validator import VerbFormModel
+from math import ceil
+from typing import List
+
+from flask import Blueprint, Response, render_template, request
+
 from app.index.form import VerbForm
 from app.index.models import Verb
-from typing import List
-from math import ceil
+from utils.pydantic_validator import VerbFormModel
 
 index_bp = Blueprint(
     "index_bp", __name__, template_folder="templates", static_folder="static"

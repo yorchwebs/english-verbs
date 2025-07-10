@@ -4,7 +4,6 @@ import peewee
 
 from app.db.database import DatabaseSingleton
 
-
 database = DatabaseSingleton().database
 
 
@@ -43,7 +42,6 @@ class Verb(BaseModel):
     MEANING = peewee.CharField()
 
     class Meta:
-
         table_name = "verbs"
 
 

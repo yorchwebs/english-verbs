@@ -22,7 +22,8 @@ class DevelopmentConfig(Config):
     """
 
     DEBUG: bool = True
-    
+
+
 class TestConfig(Config):
     """
     A configuration class for the Test application in development mode.
@@ -45,7 +46,7 @@ A dictionary that maps configuration names to configuration classes.
 Attributes:
     development (DevelopmentConfig): A configuration class for the Flask application in
     development mode.
-    
+
     default (DevelopmentConfig): The default configuration class for the Flask
     application.
 """
