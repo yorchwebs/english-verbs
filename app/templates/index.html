@@ -30,13 +30,13 @@
 
     <div class="container">
         <!-- Search Modul -->
-        <form method="post" class="d-flex flex-column justify-content-center align-items-center p-5 gap-2">
+        <form method="get" class="d-flex flex-column justify-content-center align-items-center p-5 gap-2">
             {{ form.csrf_token }}
             <div>
                 {{ form.verb.label(class="form-label fw-bold") }}
             </div>
             <div class="d-flex gap-2">
-                {{ form.verb(class="form-control", id="verb-input") }}
+                {{ form.verb(class="form-control", id="verb-input", value=search_term) }}
                 {{ form.submit(class="btn btn-warning fw-bold", id="submit-btn") }}
             </div>
         </form>
@@ -58,19 +58,47 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% if verbs %}
                     {% for verb in verbs %}
                     <tr>
                         <td>{{ verb["TYPE"] }}</td>
-                        <td>{{ verb["SIMPLE_FORM"] }}</td>
-                        <td>{{ verb["THIRD_PERSON"] }}</td>
-                        <td>{{ verb["SIMPLE_PAST"] }}</td>
-                        <td>{{ verb["PAST_PARTICIPLE"] }}</td>
-                        <td>{{ verb["GERUND"] }}</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-secondary me-2"
+                                    onclick="playAudio('{{ verb.audio_simple }}')">
+                                <i class="bi bi-volume-up-fill"></i>
+                            </button>
+                            {{ verb["SIMPLE_FORM"] }}
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-secondary me-2"
+                                    onclick="playAudio('{{ verb.audio_third }}')">
+                                <i class="bi bi-volume-up-fill"></i>
+                            </button>
+                            {{ verb["THIRD_PERSON"] }}
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-secondary me-2"
+                                    onclick="playAudio('{{ verb.audio_past }}')">
+                                <i class="bi bi-volume-up-fill"></i>
+                            </button>
+                            {{ verb["SIMPLE_PAST"] }}
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-secondary me-2"
+                                    onclick="playAudio('{{ verb.audio_part }}')">
+                                <i class="bi bi-volume-up-fill"></i>
+                            </button>
+                            {{ verb["PAST_PARTICIPLE"] }}
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-secondary me-2"
+                                    onclick="playAudio('{{ verb.audio_gerund }}')">
+                                <i class="bi bi-volume-up-fill"></i>
+                            </button>
+                            {{ verb["GERUND"] }}
+                        </td>
                         <td>{{ verb["MEANING"] }}</td>
                     </tr>
                     {% endfor %}
-                    {% endif %}
                 </tbody>
             </table>
         </div>
@@ -109,28 +137,28 @@
                     <a class="page-link {% if p != page %}bg-white text-dark{% else %}bg-warning text-dark border border-warning{% endif %}"
                         href="{{ url_for('index_bp.index', page=p) }}">{{ p }}</a>
                     </li>
-                    {% endif %}
-                    {% endfor %}
+                {% endif %}
+                {% endfor %}
 
-                    <!-- Páginas siguientes ... -->
-                    {% if page < total_pages - 2 %} <li class="page-item d-none d-sm-inline">
-                        <span class="page-link text-dark">...</span>
-                        </li>
-                        {% endif %}
+                <!-- Páginas siguientes ... -->
+                {% if page < total_pages - 2 %} <li class="page-item d-none d-sm-inline">
+                    <span class="page-link text-dark">...</span>
+                    </li>
+                {% endif %}
 
-                        <!-- Última página -->
-                        {% if total_pages > 1 %}
-                        <li class="page-item {% if page == total_pages %}active{% endif %}">
-                            <a class="page-link {% if page == total_pages %}bg-warning text-dark border border-warning{% else %}bg-white text-dark border{% endif %}"
-                                href="{{ url_for('index_bp.index', page=total_pages) }}">{{ total_pages }}</a>
-                        </li>
-                        {% endif %}
+                <!-- Última página -->
+                {% if total_pages > 1 %}
+                    <li class="page-item {% if page == total_pages %}active{% endif %}">
+                        <a class="page-link {% if page == total_pages %}bg-warning text-dark border border-warning{% else %}bg-white text-dark border{% endif %}"
+                            href="{{ url_for('index_bp.index', page=total_pages) }}">{{ total_pages }}</a>
+                    </li>
+                {% endif %}
 
-                        {% if page < total_pages %} <li class="page-item">
-                            <a class="page-link {% if p != page %}bg-white text-dark{% else %}bg-warning text-dark border border-warning{% endif %}"
-                                href="{{ url_for('index_bp.index', page=page + 1) }}">Siguiente</a>
-                            </li>
-                            {% endif %}
+                {% if page < total_pages %} <li class="page-item">
+                    <a class="page-link {% if p != page %}bg-white text-dark{% else %}bg-warning text-dark border border-warning{% endif %}"
+                        href="{{ url_for('index_bp.index', page=page + 1) }}">Siguiente</a>
+                    </li>
+                {% endif %}
             </ul>
         </nav>
     </section>
@@ -156,6 +184,17 @@
         </footer>
     </div>
     {% endblock %}
+
+    <script>
+        function playAudio(audioUrl) {
+            if (audioUrl) {
+                const audio = new Audio(audioUrl);
+                audio.play().catch(err => console.error("Error al reproducir el audio:", err));
+            } else {
+                alert("Audio no disponible.");
+            }
+        }
+    </script>
 
 </body>
 

@@ -26,3 +26,17 @@ english-verbs.db
 english-verbs.db-wal
 english-verbs.db-shm
 english-verbs.db-info
+
+audio_verbs.csv
+
+cloudinary_down.py
+
+import.py
+
+prueba.py
+
+prueba_csv.py
+
+matched_audios.txt
+
+missing_audios.txt

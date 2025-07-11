@@ -13,12 +13,11 @@ class DatabaseSingleton:
         return cls._instance
 
     def init_conn(self):
-        db_path = config("TURSO_DB_FILE", default="english-verbs.db")
         sync_url = config("TURSO_SYNC_URL")
         token = config("TURSO_AUTH_TOKEN")
-
+        db_path = config("TURSO_DB_FILE")  # Este puede dejarse como nombre simbólico
         self.conn = libsql.connect(db_path, sync_url=sync_url, auth_token=token)
-        self.conn.sync()  # Esto sincroniza con Turso
+        self.conn.sync()
 
     def get_conn(self):
         return self.conn
