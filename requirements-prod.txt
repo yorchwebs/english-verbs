@@ -1,0 +1,13 @@
+flask==3.0.3
+flask-paginate==2024.4.12
+flask-wtf==1.2.2
+wtforms==3.2.1
+
+sqlalchemy==2.0.41
+sqlalchemy-libsql==0.2.0
+libsql==0.1.2
+libsql-client==0.3.1
+libsql-experimental==0.0.55
+
+python-decouple==3.8
+requests==2.32.4

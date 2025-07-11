@@ -1,0 +1,23 @@
+# Core Flask App
+flask==3.0.3
+flask-paginate==2024.4.12
+flask-wtf==1.2.2
+wtforms==3.2.1
+
+# Base de datos con Turso/libsql
+sqlalchemy==2.0.41
+sqlalchemy-libsql==0.2.0
+libsql==0.1.2
+libsql-client==0.3.1
+libsql-experimental==0.0.55
+
+# Configuración del entorno
+python-decouple==3.8
+
+# Utilidades comunes
+requests==2.32.4
+
+# Herramientas de desarrollo
+pytest==8.4.1
+ruff==0.12.2
+basedpyright==1.30.1
