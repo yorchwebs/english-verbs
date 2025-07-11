@@ -1,16 +1,449 @@
-.btn-warning {
-    background-color: #FFDE59 !important;
-    border-color: #FFDE59 !important;
+/* custom.css */
+body {
+    font-family: "Inter", sans-serif;
+    background-color: #f8f9fa; /* Gris muy claro, casi blanco */
+    color: #343a40; /* Color de texto predeterminado para legibilidad */
+    font-family: "Inter", sans-serif; /* Sugerencia de fuente, ver más abajo */
 }
 
-.bg-warning {
-    background-color: #FFDE59 !important;
+/* custom.css */
+
+/* --- Estilos para el Hero Section (AJUSTES) --- */
+
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+    /* Remover color de texto por defecto aquí, se define en elementos internos para mayor control */
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
-.border-warning {
-    background-color: #FFDE59 !important;
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://images.pexels.com/photos/4065174/pexels-photo-4065174.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* ==================================================================== */
+    /* AJUSTES CLAVE AQUÍ: REDUCIR O ELIMINAR FILTROS DE OSCURECIMIENTO */
+    /* ==================================================================== */
+    /* Opciones: */
+
+    /* 1. Opción más simple: Eliminar completamente los filtros */
+    filter: none; /* Elimina brightness y grayscale */
+
+    /* 2. Opción: solo un poco de brillo para el logo con tu color */
+    /* filter: brightness(0.95); /* Apenas un toque, para que la imagen sea más vibrante */
+
+    /* 3. Si necesitas que sea más oscuro para el texto: */
+    /* filter: brightness(0.8); */ /* Oscurece menos la imagen */
 }
 
-.border-warning {
-    border-color: #FFDE59 !important;
+/* Pseudo-elemento para un overlay de color sobre la imagen */
+.hero-overlay::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* ==================================================================== */
+    /* AJUSTES CLAVE AQUÍ: CAMBIAR O ELIMINAR EL OVERLAY DE COLOR */
+    /* ==================================================================== */
+    /* Opciones: */
+
+    /* 1. Eliminar completamente el overlay si la imagen ya es buena */
+    background: none;
+
+    /* 2. Un overlay muy sutil del color de tu marca (amarillo) con baja opacidad */
+    /* background: linear-gradient(to right, rgba(255, 218, 68, 0.1) 0%, rgba(255, 218, 68, 0.02) 50%, rgba(255, 218, 68, 0.0) 100%); */
+
+    /* 3. Un overlay muy sutil de negro si necesitas un poco más de oscuridad para el texto blanco */
+    /* background: linear-gradient(to right, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.0) 100%); */
+}
+
+.hero-section .container {
+    position: relative;
+    z-index: 10;
+    padding: 2rem;
+    /* Remover el color de texto por defecto aquí, se define en h1 y p */
+}
+
+/* Estilos para el título */
+.hero-text-content h1 {
+    /* ==================================================================== */
+    /* AJUSTES CLAVE AQUÍ: COLOR DEL TEXTO DEL TÍTULO */
+    /* ==================================================================== */
+    color: #ffffff; /* Gris oscuro para el título, DEBERÍA RESALTAR con imagen más clara */
+}
+
+/* Estilos para la descripción */
+.hero-text-content p {
+    /* ==================================================================== */
+    /* AJUSTES CLAVE AQUÍ: COLOR DEL TEXTO DE LA DESCRIPCIÓN */
+    /* ==================================================================== */
+    color: #ffffff; /* Gris oscuro para la descripción */
+    font-size: 1.15rem;
+    line-height: 1.6;
+}
+
+/* Caja del logo */
+.hero-logo-box {
+    background-color: #ffffff; /* Fondo blanco para la caja del logo */
+    border: 4px solid #ffda44; /* Borde amarillo principal */
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Sombra para que destaque, quizás un poco más fuerte */
+    aspect-ratio: 1 / 1;
+    max-width: 250px;
+    width: 100%;
+    overflow: hidden;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease; /* Transición para efecto hover */
+}
+
+/* Opcional: efecto hover para la caja del logo */
+.hero-logo-box:hover {
+    transform: translateY(-5px); /* Pequeño levantamiento al pasar el ratón */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25); /* Sombra más fuerte al pasar el ratón */
+}
+
+/* Imagen del logo dentro de la caja */
+.hero-logo-box .hero-logo-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    /* Si tu logo de Cloudinary ya tiene fondo amarillo y lo pones sobre fondo blanco,
+       este filtro lo hará más visible y le dará contraste. */
+    filter: drop-shadow(
+        2px 2px 5px rgba(0, 0, 0, 0.3)
+    ); /* Sombra para el logo en sí */
+    /* Si tienes un logo PNG transparente, este filtro seguirá funcionando */
+}
+
+/* Media Queries para Responsiveness (Mantener los anteriores, o ajustar finamente) */
+/* ... (mantener los @media queries que ya tenías) ... */
+
+/* custom.css */
+
+/* --- Estilos para el Hero Section (AJUSTES FINALES MÓVILES) --- */
+
+/* ... (mantener todo el CSS anterior del hero-section hasta los media queries) ... */
+
+/* Media Queries para Responsiveness */
+@media (max-width: 767.98px) {
+    .hero-section {
+        min-height: 600px; /* Aumentar la altura mínima en móviles para que todo sea visible */
+        /* Puedes ajustar este valor (ej. 550px, 650px) dependiendo del contenido real */
+        padding-top: 2.5rem; /* Ajustar padding superior */
+        padding-bottom: 2.5rem; /* Ajustar padding inferior */
+    }
+    .hero-text-content {
+        /* mb-4 ya debería dar el espacio, pero puedes forzarlo si no es suficiente */
+        margin-top: 2rem !important; /* Añadir espacio arriba del texto si el logo está encima */
+        margin-bottom: 0 !important; /* Eliminar cualquier margen inferior no deseado */
+    }
+    .hero-logo-box {
+        margin-bottom: 0 !important; /* Asegurar que no haya margen inferior excesivo de Bootstrap */
+    }
+    .hero-text-content h1 {
+        font-size: 2.2rem; /* Título un poco más pequeño para ajuste */
+    }
+    .hero-text-content p {
+        font-size: 0.95rem; /* Descripción un poco más pequeña para ajuste */
+    }
+}
+
+/* Puedes añadir este media query si necesitas un ajuste fino para tablets */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .hero-section {
+        min-height: 400px; /* Altura intermedia para tablets */
+    }
+    .hero-text-content h1 {
+        font-size: 3rem;
+    }
+    .hero-text-content p {
+        font-size: 1.1rem;
+    }
+    .hero-logo-box {
+        max-width: 220px;
+    }
+}
+
+/* --- Estilos para el bloque de búsqueda --- */
+
+/* Contenedor principal de la barra de búsqueda */
+#search-form {
+    border-radius: 8px; /* Bordes ligeramente redondeados para todo el grupo */
+    overflow: hidden; /* Asegura que los bordes redondeados se vean bien */
+}
+
+/* Estilo para el addon del icono de búsqueda */
+.input-group-text.search-icon-addon {
+    background-color: #ffda44; /* Amarillo Principal */
+    color: #343a40; /* Gris Oscuro para el icono */
+    border-color: #ffda44; /* Borde del mismo color que el fondo */
+    padding: 0.75rem 1rem; /* Ajustar padding si es necesario */
+}
+
+/* Estilo para el campo de entrada (input) */
+#search-form .form-control {
+    border-color: #ced4da; /* Gris Neutro para el borde */
+    color: #343a40; /* Gris Oscuro para el texto */
+    padding: 0.75rem 1rem; /* Ajustar padding para que coincida con el addon */
+}
+
+#search-form .form-control::placeholder {
+    color: #6c757d; /* Un gris ligeramente más claro para el placeholder */
+}
+
+#search-form .form-control:focus {
+    border-color: #007bff; /* Azul de Interacción al enfocar */
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25); /* Sombra azul sutil */
+    background-color: #ffffff; /* Asegura que el fondo sea blanco al enfocar */
+}
+
+/* Estilo para el botón de búsqueda */
+.btn.search-button {
+    background-color: #ffda44; /* Amarillo Principal */
+    border-color: #ffda44; /* Borde del mismo color */
+    color: #343a40; /* Gris Oscuro para el texto del botón */
+    font-weight: 600; /* Texto un poco más grueso */
+    padding: 0.75rem 1.5rem; /* Ajustar padding */
+}
+
+.btn.search-button:hover {
+    background-color: #ffce00; /* Amarillo un poco más oscuro al pasar el ratón */
+    border-color: #ffce00;
+    color: #343a40; /* Mismo color de texto */
+}
+
+.btn.search-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(255, 218, 68, 0.5); /* Sombra amarilla al enfocar */
+}
+
+/* Asegura que el margen mx-auto funcione correctamente con max-width */
+.mx-auto {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* custom.css */
+
+/* --- Estilos para la Tabla de Verbos --- */
+
+/* Contenedor principal de la tabla */
+.table {
+    background-color: #ffffff; /* Fondo blanco para la tabla */
+    border-radius: 8px; /* Bordes ligeramente redondeados */
+    overflow: hidden; /* Asegura que el border-radius se aplique a los bordes internos */
+    /* La clase Bootstrap 'shadow-sm' ya maneja la sombra, no es necesario añadirla aquí */
+    margin-bottom: 0; /* Elimina el margen inferior predeterminado de las tablas si no lo necesitas */
+}
+
+/* Encabezados de la tabla (<thead>) */
+.table thead {
+    background-color: #f8f9fa; /* Gris Claro para el fondo del encabezado */
+}
+
+.table thead th {
+    color: #343a40; /* Gris Oscuro para el texto del encabezado */
+    font-weight: 600; /* Negrita para los encabezados */
+    padding: 1rem 0.75rem; /* Aumentar el padding para más espacio */
+    border-bottom: 2px solid #ced4da; /* Borde inferior más pronunciado para separar el encabezado del cuerpo */
+    text-align: left; /* Alineación del texto a la izquierda */
+    vertical-align: middle; /* Alineación vertical al centro */
+}
+
+/* Filas del cuerpo de la tabla (<tbody>) */
+.table tbody tr {
+    color: #343a40; /* Gris Oscuro para el texto de las filas */
+}
+
+/* Efecto hover en las filas (clase Bootstrap: .table-hover) */
+.table-hover tbody tr:hover {
+    background-color: #e9ecef; /* Gris Suave al pasar el ratón */
+    transition: background-color 0.2s ease-in-out; /* Transición suave para el efecto hover */
+}
+
+/* Celdas de la tabla (<td>) */
+.table tbody td {
+    padding: 0.85rem 0.75rem; /* Ajustar padding para más espacio vertical */
+    border-top: none; /* Como ya tienes .table-borderless, esto es redundante pero asegura */
+    vertical-align: middle; /* Alinea verticalmente el contenido de las celdas */
+}
+
+/* Estilos específicos para el botón de audio y el texto dentro de la celda */
+.table .d-flex.align-items-center.gap-2 {
+    white-space: nowrap; /* Evita que el texto y el botón se dividan en líneas */
+}
+
+/* Botones de audio (btn-audio) */
+.btn-audio {
+    background-color: #e9ecef; /* Gris Suave para el fondo del botón */
+    border-color: #e9ecef; /* Borde del mismo color */
+    color: #007bff; /* Azul de Interacción para el icono */
+    padding: 0.3rem 0.5rem; /* Ajustar padding para un botón pequeño */
+    font-size: 0.85rem; /* Tamaño de fuente para el icono */
+    border-radius: 4px; /* Bordes ligeramente redondeados */
+    display: flex; /* Para centrar el icono si es necesario */
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-audio:hover {
+    background-color: #ced4da; /* Gris Neutro al pasar el ratón */
+    border-color: #ced4da;
+    color: #0056b3; /* Azul más oscuro al pasar el ratón */
+}
+
+.btn-audio:focus {
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25); /* Sombra azul sutil al enfocar */
+}
+
+/* Estilo para el texto del verbo (span.text-nowrap) */
+.table tbody td .text-nowrap {
+    font-weight: 500; /* Ligeramente más negrita para el texto del verbo */
+}
+
+/* Ajustes para la clase 'align-middle' en la tabla */
+.table.align-middle > :not(caption) > * > * {
+    vertical-align: middle; /* Asegura la alineación vertical en todas las celdas */
+}
+
+/* Si quisieras una fila con "cebrado" (alternating colors), puedes añadir: */
+/* .table tbody tr:nth-of-type(odd) {
+    background-color: #FDFDFD; /* Un blanco muy suave o incluso ligeramente diferente */
+/* } */
+
+/* Puedes añadir un margen superior a la tabla si el container no lo tiene */
+.table.shadow-sm {
+    margin-top: 2rem; /* Ejemplo: 2rem de margen superior si no hay espacio antes */
+}
+
+/* custom.css */
+
+/* --- Estilos para la Paginación --- */
+
+/* Contenedor principal de la paginación */
+.pagination {
+    /* Aquí podemos usar las variables CSS de Bootstrap 5 para una personalización más limpia */
+    --bs-pagination-color: #007bff; /* Azul de Interacción para el texto de los enlaces normales */
+    --bs-pagination-bg: #ffffff; /* Fondo blanco para los enlaces normales */
+    --bs-pagination-border-color: #ced4da; /* Gris Neutro para el borde de los enlaces normales */
+    --bs-pagination-hover-color: #0056b3; /* Azul más oscuro al pasar el ratón */
+    --bs-pagination-hover-bg: #e9ecef; /* Gris Suave al pasar el ratón */
+    --bs-pagination-hover-border-color: #ced4da; /* Borde al pasar el ratón */
+    --bs-pagination-focus-color: #0056b3; /* Color de texto al enfocar */
+    --bs-pagination-focus-bg: #e9ecef; /* Color de fondo al enfocar */
+    --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25); /* Sombra azul al enfocar */
+    --bs-pagination-active-color: #343a40; /* Gris Oscuro para el texto del activo */
+    --bs-pagination-active-bg: #ffda44; /* Amarillo Principal para el fondo del activo */
+    --bs-pagination-active-border-color: #ffda44; /* Amarillo Principal para el borde del activo */
+    --bs-pagination-disabled-color: #adb5bd; /* Gris más claro para el texto deshabilitado */
+    --bs-pagination-disabled-bg: #ffffff; /* Fondo blanco para el deshabilitado */
+    --bs-pagination-disabled-border-color: #e9ecef; /* Gris Suave para el borde deshabilitado */
+
+    border-radius: 8px; /* Bordes ligeramente redondeados para la paginación completa */
+    overflow: hidden; /* Asegura que los bordes redondeados se apliquen bien */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Sombra sutil para la barra de paginación */
+}
+
+/* Ajustes adicionales si las variables no son suficientes o para navegadores antiguos */
+.pagination .page-item .page-link {
+    /* General styles, mostly overridden by variables above, but good for fallback */
+    padding: 0.75rem 1rem; /* Aumentar el padding para un mejor toque */
+    min-width: 44px; /* Asegura un ancho mínimo para una mejor área de clic */
+    text-align: center; /* Centra el texto del número de página */
+}
+
+/* Eliminar el border-top-left-radius y border-bottom-left-radius del primer item */
+.pagination .page-item:first-child .page-link {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+/* Eliminar el border-top-right-radius y border-bottom-right-radius del último item */
+.pagination .page-item:last-child .page-link {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+/* custom.css */
+
+/* --- Estilos para la Paginación --- */
+
+/* ... tus estilos de paginación existentes ... */
+
+.pagination .page-item .page-link {
+    /* ... otros estilos de page-link ... */
+    cursor: pointer; /* Asegura que el cursor sea un puntero de mano al pasar el ratón */
+}
+
+/* Para los elementos deshabilitados, es bueno que el cursor sea el predeterminado o "not-allowed" */
+.pagination .page-item.disabled .page-link {
+    cursor: not-allowed; /* Indica que no se puede hacer clic */
+}
+
+/* custom.css */
+
+/* --- Estilos para el Footer --- */
+
+footer {
+    /* El border-top ya está en el HTML, pero podemos controlar su color aquí */
+    border-top: 1px solid #ced4da !important; /* Gris Neutro para el borde superior */
+    padding-top: 1.5rem; /* Ajustar padding superior */
+    padding-bottom: 1.5rem; /* Ajustar padding inferior */
+}
+
+footer .col-md-4.d-flex {
+    align-items: center; /* Asegura que el contenido esté centrado verticalmente */
+}
+
+/* Texto del copyright */
+footer span.text-body-dark {
+    color: #343a40 !important; /* Gris Oscuro para el texto del copyright */
+    font-weight: 600; /* Un poco más de peso para el texto */
+    font-size: 0.95rem; /* Ajustar tamaño si es necesario */
+}
+
+/* Enlace dentro del copyright (Yorch Webs) */
+footer span.text-body-dark a.text-dark {
+    color: #343a40 !important; /* Gris Oscuro para el enlace */
+    text-decoration: none; /* Quitamos el subrayado por defecto para controlar el hover */
+    font-weight: 700; /* Más negrita para el nombre */
+    transition:
+        color 0.2s ease-in-out,
+        text-decoration 0.2s ease-in-out; /* Transición suave */
+}
+
+footer span.text-body-dark a.text-dark:hover {
+    color: #007bff !important; /* Azul de Interacción al pasar el ratón */
+    text-decoration: underline !important; /* Subrayado al pasar el ratón */
+}
+
+/* Iconos de redes sociales */
+footer .col-md-4.d-flex a i {
+    color: #343a40 !important; /* Gris Oscuro para los iconos */
+    font-size: 1.25rem; /* Tamaño de fuente para los iconos, ajusta si es necesario (fs-6 es 1rem) */
+    transition: color 0.2s ease-in-out; /* Transición suave para el cambio de color */
+}
+
+footer .col-md-4.d-flex a i:hover {
+    color: #007bff !important; /* Azul de Interacción al pasar el ratón */
+}
+
+/* Asegurar que el contenedor del footer no tenga un fondo blanco si el body tiene un gris claro */
+/* Si el footer está directamente en el body, esto puede ser redundante. */
+/* Si el footer tiene un fondo diferente en tu diseño, ajústalo aquí. */
+footer {
+    background-color: #f8f9fa; /* Mismo color de fondo que el body para que se integre bien */
 }
