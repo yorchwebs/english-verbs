@@ -1,0 +1,113 @@
+<div id="verb-table">
+    <!-- Tabla -->
+    <!-- partials/verbs_table.html -->
+    <section class="container">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>TYPE</th>
+                        <th>SIMPLE FORM</th>
+                        <th>THIRD PERSON</th>
+                        <th>SIMPLE PAST</th>
+                        <th>PAST PARTICIPLE</th>
+                        <th>GERUND</th>
+                        <th>MEANING</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for verb in verbs %}
+                    <tr>
+                        <td>{{ verb["TYPE"] }}</td>
+                        <td>
+                            <button
+                                onclick="playAudio('{{ verb.audio_simple }}')"
+                                class="btn btn-sm btn-outline-secondary me-2"
+                            >
+                                <i class="bi bi-volume-up-fill"></i>
+                            </button>
+                            {{ verb["SIMPLE_FORM"] }}
+                        </td>
+                        <td>
+                            <button
+                                onclick="playAudio('{{ verb.audio_third }}')"
+                                class="btn btn-sm btn-outline-secondary me-2"
+                            >
+                                <i class="bi bi-volume-up-fill"></i>
+                            </button>
+                            {{ verb["THIRD_PERSON"] }}
+                        </td>
+                        <td>
+                            <button
+                                onclick="playAudio('{{ verb.audio_past }}')"
+                                class="btn btn-sm btn-outline-secondary me-2"
+                            >
+                                <i class="bi bi-volume-up-fill"></i>
+                            </button>
+                            {{ verb["SIMPLE_PAST"] }}
+                        </td>
+                        <td>
+                            <button
+                                onclick="playAudio('{{ verb.audio_part }}')"
+                                class="btn btn-sm btn-outline-secondary me-2"
+                            >
+                                <i class="bi bi-volume-up-fill"></i>
+                            </button>
+                            {{ verb["PAST_PARTICIPLE"] }}
+                        </td>
+                        <td>
+                            <button
+                                onclick="playAudio('{{ verb.audio_gerund }}')"
+                                class="btn btn-sm btn-outline-secondary me-2"
+                            >
+                                <i class="bi bi-volume-up-fill"></i>
+                            </button>
+                            {{ verb["GERUND"] }}
+                        </td>
+                        <td>{{ verb["MEANING"] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Pagination -->
+    <section class="container mt-4">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {% if page > 1 %}
+                <li class="page-item">
+                    <a
+                        class="page-link"
+                        hx-get="{{ url_for('index_bp.verbs_partial', page=page - 1, verb=search_term) }}"
+                        hx-target="#verb-table"
+                        hx-swap="innerHTML"
+                        >Anterior</a
+                    >
+                </li>
+                {% endif %} {% for p in range(1, total_pages + 1) %}
+                <li class="page-item {% if p == page %}active{% endif %}">
+                    <a
+                        class="page-link"
+                        hx-get="{{ url_for('index_bp.verbs_partial', page=p, verb=search_term) }}"
+                        hx-target="#verb-table"
+                        hx-swap="innerHTML"
+                        >{{ p }}</a
+                    >
+                </li>
+                {% endfor %} {% if page < total_pages %}
+                <li class="page-item">
+                    <a
+                        class="page-link"
+                        hx-get="{{ url_for('index_bp.verbs_partial', page=page + 1, verb=search_term) }}"
+                        hx-target="#verb-table"
+                        hx-swap="innerHTML"
+                        >Siguiente</a
+                    >
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </section>
+</div>

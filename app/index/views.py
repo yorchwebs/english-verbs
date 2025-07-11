@@ -1,28 +1,29 @@
 from math import ceil
 
-from flask import Blueprint, redirect, render_template, request
+from flask import Blueprint, render_template, request
 
 from app.db.database import DatabaseSingleton
-from app.index.form import VerbForm
 
 index_bp = Blueprint("index_bp", __name__, template_folder="templates")
 
 
-@index_bp.route("/", methods=["GET", "POST"])
+@index_bp.route("/", methods=["GET"])
 def index():
-    form = VerbForm()
+    return render_template("index.html")
+
+
+@index_bp.route("/_verbs", methods=["GET"])
+def verbs_partial():
     conn = DatabaseSingleton().get_conn()
 
     per_page = 20
     page = request.args.get("page", 1, type=int)
     offset = (page - 1) * per_page
 
-    if form.validate_on_submit():
-        # Si se envió el formulario por POST, redirige a una URL con parámetro 'verb'
-        search_term = form.verb.data.upper()
-        return redirect(f"/?verb={search_term}")
-    else:
-        search_term = request.args.get("verb", "").upper()
+    search_term = request.args.get("verb", "").upper()
+    page = request.args.get("page", 1, type=int)
+    per_page = 20
+    offset = (page - 1) * per_page
 
     # --- Consulta de Verbos ---
     verb_query = "SELECT * FROM Verbs"
@@ -82,14 +83,12 @@ def index():
 
         verbs.append(verb)
 
-    # Total de páginas
     count_cursor = conn.execute(count_query, tuple(count_params))
     total_rows = count_cursor.fetchone()[0]
     total_pages = ceil(total_rows / per_page)
 
     return render_template(
-        "index.html",
-        form=form,
+        "verbs_table.html",
         verbs=verbs,
         page=page,
         total_pages=total_pages,
