@@ -1,33 +1,24 @@
-"""This is my Singleton Class to connect PostgreSQL and Flask with:
-peewee, pymysql and python-decouple.
-"""
-
-import peewee
+# app/db/database.py
+import libsql
 from decouple import config
 
 
 class DatabaseSingleton:
-    """Singleton class to connect PostgreSQL and Flask with peewee."""
-
     _instance = None
 
     def __new__(cls):
-        """Database instance."""
         if cls._instance is None:
-            cls._instance = super().__new__(cls)
-            cls._instance.init_db()
+            cls._instance = super(DatabaseSingleton, cls).__new__(cls)
+            cls._instance.init_conn()
         return cls._instance
 
-    def init_db(self):
-        """Initialize the database."""
-        self.database = peewee.PostgresqlDatabase(
-            config("DB_NAME"),
-            user=config("DB_USER"),
-            password=config("DB_PASSWORD"),
-            host=config("DB_HOST"),
-            port=config("DB_PORT"),
-        )
+    def init_conn(self):
+        db_path = config("TURSO_DB_FILE", default="english-verbs.db")
+        sync_url = config("TURSO_SYNC_URL")
+        token = config("TURSO_AUTH_TOKEN")
 
-    def get_database(self):
-        """Return the database instance."""
-        return self.database
+        self.conn = libsql.connect(db_path, sync_url=sync_url, auth_token=token)
+        self.conn.sync()  # Esto sincroniza con Turso
+
+    def get_conn(self):
+        return self.conn

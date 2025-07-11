@@ -21,3 +21,8 @@ utils/audioverbs_poblation.py
 utils/database_poblation.py
 
 jsons/
+
+english-verbs.db
+english-verbs.db-wal
+english-verbs.db-shm
+english-verbs.db-info

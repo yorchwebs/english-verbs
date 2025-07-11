@@ -1,37 +1,23 @@
+# app/__init__.py
+
 from flask import Flask
 
 from app.db.database import DatabaseSingleton
-from app.index.models import Verb
-
-# from flask_wtf.csrf import CSRFProtect
 from app.index.views import index_bp
 
-app = Flask(__name__)
-
-# csrf = CSRFProtect()
-
-database = DatabaseSingleton().database
+db_singleton = DatabaseSingleton()
 
 
-def create_app(config):
-    """
-    Creates and configures the Flask application.
+def create_app(config_class):
+    app = Flask(__name__)
+    app.config.from_object(config_class)
 
-    Args:
-        config (str): The name of the configuration class to use for the Flask
-        application.
-
-    Returns:
-        The configured Flask application instance.
-    """
-
-    app.config.from_object(config)
-
-    # csrf.init_app(app)
-
+    # Blueprints
     app.register_blueprint(index_bp)
 
+    # Sincronizar la base con Turso (solo la primera vez que se conecte)
     with app.app_context():
-        database.create_tables([Verb], safe=True)
+        conn = db_singleton.get_conn()
+        conn.sync()  # Puedes omitir si ya se hace en el Singleton
 
     return app

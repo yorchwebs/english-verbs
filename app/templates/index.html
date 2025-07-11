@@ -48,7 +48,6 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
                         <th scope="col">TYPE</th>
                         <th scope="col">SIMPLE FORM</th>
                         <th scope="col">THIRD PERSON</th>
@@ -59,18 +58,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- For Loop -->
                     {% if verbs %}
                     {% for verb in verbs %}
                     <tr>
-                        <th scope="row">{{verb.NUM}}</th>
-                        <td>{{verb.TYPE}}</td>
-                        <td>{{verb.SIMPLE_FORM}}</td>
-                        <td>{{verb.THIRD_PERSON}}</td>
-                        <td>{{verb.SIMPLE_PAST}}</td>
-                        <td>{{verb.PAST_PARTICIPLE}}</td>
-                        <td>{{verb.GERUND}}</td>
-                        <td>{{verb.MEANING}}</td>
+                        <td>{{ verb["TYPE"] }}</td>
+                        <td>{{ verb["SIMPLE_FORM"] }}</td>
+                        <td>{{ verb["THIRD_PERSON"] }}</td>
+                        <td>{{ verb["SIMPLE_PAST"] }}</td>
+                        <td>{{ verb["PAST_PARTICIPLE"] }}</td>
+                        <td>{{ verb["GERUND"] }}</td>
+                        <td>{{ verb["MEANING"] }}</td>
                     </tr>
                     {% endfor %}
                     {% endif %}
@@ -91,13 +88,13 @@
                         href="{{ url_for('index_bp.index', page=page - 1) }}">Anterior</a>
                 </li>
                 {% endif %}
-    
+
                 <!-- Primera página -->
                 <li class="page-item {% if page == 1 %}active{% endif %}">
                     <a class="page-link {% if page == 1 %}bg-warning text-dark border border-warning{% else %}bg-white text-dark border{% endif %}"
                         href="{{ url_for('index_bp.index', page=1) }}">1</a>
                 </li>
-    
+
                 <!-- Páginas anteriores ... -->
                 {% if page > 3 %}
                 <li class="page-item d-none d-sm-inline">
@@ -105,7 +102,7 @@
                         class="page-link {% if p != page %}bg-white text-dark{% else %}bg-warning text-dark border border-warning{% endif %}">...</span>
                 </li>
                 {% endif %}
-    
+
                 <!-- Páginas alrededor de la actual -->
                 {% for p in range(page - 1, page + 2) %}
                 {% if p > 1 and p < total_pages %} <li class="page-item {% if p == page %}active{% endif %}">
@@ -114,13 +111,13 @@
                     </li>
                     {% endif %}
                     {% endfor %}
-    
+
                     <!-- Páginas siguientes ... -->
                     {% if page < total_pages - 2 %} <li class="page-item d-none d-sm-inline">
                         <span class="page-link text-dark">...</span>
                         </li>
                         {% endif %}
-    
+
                         <!-- Última página -->
                         {% if total_pages > 1 %}
                         <li class="page-item {% if page == total_pages %}active{% endif %}">
@@ -128,7 +125,7 @@
                                 href="{{ url_for('index_bp.index', page=total_pages) }}">{{ total_pages }}</a>
                         </li>
                         {% endif %}
-    
+
                         {% if page < total_pages %} <li class="page-item">
                             <a class="page-link {% if p != page %}bg-white text-dark{% else %}bg-warning text-dark border border-warning{% endif %}"
                                 href="{{ url_for('index_bp.index', page=page + 1) }}">Siguiente</a>
@@ -145,7 +142,7 @@
     <div class="container">
         <footer class="d-flex justify-content-between py-3 my-4 border-top">
             <div class="col-md-4 d-flex justify-content-start">
-                <span class="mb-3 mb-md-0 text-body-dark fw-bold">© 2024 | <a class="text-dark text-decoration-underline fw-bold" href="https://yorchwebs.com" target="_blank">Yorch Webs</a></span>
+                <span class="mb-3 mb-md-0 text-body-dark fw-bold">© 2025 | <a class="text-dark text-decoration-underline fw-bold" href="https://yorchwebs.com" target="_blank">Yorch Webs</a></span>
             </div>
 
             <div class="col-md-4 d-flex justify-content-end gap-3">

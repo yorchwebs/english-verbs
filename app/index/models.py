@@ -1,67 +1,62 @@
-"""This module contains the models for the index page."""
+# app/index/models.py
 
-import peewee
+from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy.orm import declarative_base, relationship
 
-from app.db.database import DatabaseSingleton
-
-database = DatabaseSingleton().database
+Base = declarative_base()
 
 
-class BaseModel(peewee.Model):
-    """A base model class that all other models should inherit from.
+class Verb(Base):
+    """
+    Modelo que representa un verbo.
 
-    Attributes:
-        database (Database): The database connection to use for this model.
+    Atributos:
+        num (int): Clave primaria.
+        type (str): Tipo de verbo.
+        simple_form (str): Forma simple.
+        third_person (str): Tercera persona.
+        simple_past (str): Pasado simple.
+        past_participle (str): Participio pasado.
+        gerund (str): Gerundio.
+        meaning (str): Significado.
     """
 
-    class Meta:
-        database = database
+    __tablename__ = "verbs"
+
+    num = Column(Integer, primary_key=True, autoincrement=True)
+    type = Column(String)
+    simple_form = Column(String)
+    third_person = Column(String)
+    simple_past = Column(String)
+    past_participle = Column(String)
+    gerund = Column(String)
+    meaning = Column(String)
+
+    audio_verb = relationship("AudioVerb", back_populates="verb", uselist=False)
 
 
-class Verb(BaseModel):
-    """A model representing a verb.
+class AudioVerb(Base):
+    """
+    Modelo que representa los audios para cada forma verbal.
 
-    Attributes:
-        num_id (int): The number ID of the verb.
-        verb_type (str): The type of the verb (present, past, etc.).
-        simple_form (str): The simple form of the verb.
-        third_person (str): The third person form of the verb.
-        simple_past (str): The simple past form of the verb.
-        past_participle (str): The past participle form of the verb.
-        gerund (str): The gerund form of the verb.
-        meaning (str): The meaning of the verb.
+    Atributos:
+        id (int): Clave primaria.
+        simple_form (str): URL del audio de la forma simple.
+        third_person (str): URL del audio de la tercera persona.
+        simple_past (str): URL del audio del pasado simple.
+        past_participle (str): URL del audio del participio.
+        gerund (str): URL del audio del gerundio.
+        verb_id (int): Relación con el verbo.
     """
 
-    NUM = peewee.PrimaryKeyField()
-    TYPE = peewee.CharField()
-    SIMPLE_FORM = peewee.CharField()
-    THIRD_PERSON = peewee.CharField()
-    SIMPLE_PAST = peewee.CharField()
-    PAST_PARTICIPLE = peewee.CharField()
-    GERUND = peewee.CharField()
-    MEANING = peewee.CharField()
+    __tablename__ = "audio_verbs"
 
-    class Meta:
-        table_name = "verbs"
+    id = Column(Integer, primary_key=True)
+    simple_form = Column(String)
+    third_person = Column(String)
+    simple_past = Column(String)
+    past_participle = Column(String)
+    gerund = Column(String)
 
-
-# class AudioVerb(BaseModel):
-#     """A model representing an audio verb.
-
-#     Attributes:
-#         simple_form (str): The simple form of the verb.
-#         third_person (str): The third person form of the verb.
-#         simple_past (str): The simple past form of the verb.
-#         past_participle (str): The past participle form of the verb.
-#         gerund (str): The gerund form of the verb.
-#     """
-
-#     SIMPLE_FORM = peewee.CharField()
-#     THIRD_PERSON = peewee.CharField()
-#     SIMPLE_PAST = peewee.CharField()
-#     PAST_PARTICIPLE = peewee.CharField()
-#     GERUND = peewee.CharField()
-#     VERBS = peewee.ForeignKeyField('Verb', backref='audio_verbs', on_delete='CASCADE', unique=True)
-
-#     class Meta:
-#         table_name = "audio_verbs"
+    verb_id = Column(Integer, ForeignKey("verbs.num"), unique=True)
+    verb = relationship("Verb", back_populates="audio_verb")
